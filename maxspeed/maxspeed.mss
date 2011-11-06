@@ -53,3 +53,7 @@
   [zoom>17] { line-width: 8 }
 
 }
+
+#speed_camera[zoom > 10] {
+  point-file: url('../maxspeed/symbols/yellow-dot-16.png');
+}

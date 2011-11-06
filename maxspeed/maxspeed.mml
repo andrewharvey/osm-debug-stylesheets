@@ -22,6 +22,17 @@
         "table": "(\n SELECT\n   way,\n   highway,\n   tags->'maxspeed' as maxspeed\n FROM\n   planet_osm_line\n WHERE\n   (highway IN ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street', 'service', 'services', 'rest_area', 'bus_guideway')) AND\n   ((tags->'maxspeed') IS NULL)\n) AS roads_no_maxspeed"
       }, 
       "name": "road-nomaxspeed"
+    }, 
+    {
+      "geometry": "point", 
+      "id": "speed_camera", 
+      "Datasource": {
+        "type": "postgis", 
+        "geometry_field": "way", 
+        "key_field": "", 
+        "table": "(\n SELECT\n   way,\n   highway\n FROM\n   planet_osm_point\n WHERE\n   (highway IN ('speed_camera'))\n) AS speedcamera"
+      }, 
+      "name": "speed_camera"
     }
   ], 
   "description": "Transparent map overlay showing maxspeed.", 
