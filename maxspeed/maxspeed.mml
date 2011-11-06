@@ -8,9 +8,20 @@
         "type": "postgis", 
         "geometry_field": "way", 
         "key_field": "", 
-        "table": "(\n SELECT\n   way,\n   highway,\n   tags->'maxspeed' as maxspeed\n FROM\n   planet_osm_line\n WHERE\n   (highway IS NOT NULL) AND\n   ((tags->'maxspeed') IS NOT NULL)\n) AS roads_maxspeed"
+        "table": "(\n SELECT\n   way,\n   highway,\n   tags->'maxspeed' as maxspeed\n FROM\n   planet_osm_line\n WHERE\n   (highway IN ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street', 'service', 'services', 'rest_area', 'bus_guideway')) AND\n   ((tags->'maxspeed') IS NOT NULL)\n) AS roads_maxspeed"
       }, 
       "name": "road"
+    }, 
+    {
+      "geometry": "linestring", 
+      "id": "road-nomaxspeed", 
+      "Datasource": {
+        "type": "postgis", 
+        "geometry_field": "way", 
+        "key_field": "", 
+        "table": "(\n SELECT\n   way,\n   highway,\n   tags->'maxspeed' as maxspeed\n FROM\n   planet_osm_line\n WHERE\n   (highway IN ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street', 'service', 'services', 'rest_area', 'bus_guideway')) AND\n   ((tags->'maxspeed') IS NULL)\n) AS roads_no_maxspeed"
+      }, 
+      "name": "road-nomaxspeed"
     }
   ], 
   "description": "Transparent map overlay showing maxspeed.", 

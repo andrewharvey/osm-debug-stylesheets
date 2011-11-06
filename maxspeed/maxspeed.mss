@@ -6,46 +6,47 @@
  * rights to this work.
  */
  
-/*
-  total spin 300 degrees
-  start: 190... decreasing to 0, then jump to 360, then decreasing to 250
-*/
-@sp5: #9EFF37;
-@sp10: spin(@sp5, -27);
-@sp20: spin(@sp10, -27);
-@sp30: spin(@sp20, -27);
-@sp40: spin(@sp30, -27);
-@sp50: spin(@sp40, -27);
-@sp60: spin(@sp50, -27);
-@sp70: spin(@sp60, -27);
-@sp80: spin(@sp70, -27);
-@sp90: spin(@sp80, -27);
-@sp100: spin(@sp90, -27);
-@sp110: spin(@sp100, -27);
-
 #road {
 
-  line-width: 1;
+  /* black if a maxspeed tag exists, but we don't recognise it */
   line-color: #000000;
 
-  [maxspeed='5'] { line-color: @sp5 }
-  [maxspeed='10'] { line-color: @sp10 }
-  [maxspeed='20'] { line-color: @sp20 }
-  [maxspeed='30'] { line-color: @sp30 }
-  [maxspeed='40'] { line-color: @sp40 }
-  [maxspeed='50'] { line-color: @sp50 }
-  [maxspeed='60'] { line-color: @sp60 }
-  [maxspeed='70'] { line-color: @sp70 }
-  [maxspeed='80'] { line-color: @sp80 }
-  [maxspeed='90'] { line-color: @sp90 }
-  [maxspeed='100'] { line-color: @sp100 }
-  [maxspeed='110'] { line-color: @sp110 }
+  [maxspeed='5'] { line-color:  #00da8b }
+  [maxspeed='10'] { line-color: #00da8b }
+  [maxspeed='15'] { line-color: #00da8b }
+  [maxspeed='20'] { line-color: #00B0DA }
+  [maxspeed='30'] { line-color: #4d4dff }
+  [maxspeed='40'] { line-color: #4d4d00 }
+  [maxspeed='50'] { line-color: #07f807 }
+  [maxspeed='60'] { line-color: #9f9fff }
+  [maxspeed='70'] { line-color: #eec600 }
+  [maxspeed='80'] { line-color: #ffaf00 }
+  [maxspeed='90'] { line-color: #07f8f8 }
+  [maxspeed='100'] { line-color: #f807f8 }
+  [maxspeed='110'] { line-color: #7807f8 }
+  [maxspeed='120'] { line-color: #f6f807 }
+  [maxspeed='130'] { line-color: #c0f100 }
 
-  [zoom<11] { line-width: 0.25  }
+  [zoom<11] { line-width: 0.25 }
   [zoom=11] { line-width: 0.5  }
-  [zoom=12] { line-width: 0.75  }
-  [zoom=13] { line-width: 1  }
-  [zoom=14] { line-width: 2  }
+  [zoom=12] { line-width: 0.75 }
+  [zoom=13] { line-width: 1 }
+  [zoom=14] { line-width: 2 }
+  [zoom=15] { line-width: 3 }
+  [zoom=16] { line-width: 6 }
+  [zoom=17] { line-width: 7 }
+  [zoom>17] { line-width: 8 }
+
+}
+
+#road-nomaxspeed {
+  line-color: #f90808;
+
+  [zoom<11] { line-width: 0.25 }
+  [zoom=11] { line-width: 0.5  }
+  [zoom=12] { line-width: 0.75 }
+  [zoom=13] { line-width: 1 }
+  [zoom=14] { line-width: 2 }
   [zoom=15] { line-width: 3 }
   [zoom=16] { line-width: 6 }
   [zoom=17] { line-width: 7 }
