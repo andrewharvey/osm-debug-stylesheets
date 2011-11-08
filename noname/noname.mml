@@ -1,0 +1,32 @@
+{
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+  "Layer": [
+    {
+      "geometry": "linestring", 
+      "id": "noname", 
+      "Datasource": {
+        "type": "postgis", 
+        "geometry_field": "way", 
+        "key_field": "", 
+        "table": "(\n SELECT way FROM planet_osm_line WHERE ((planet_osm_line.highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'road')) AND ((planet_osm_line.tags->'noname') IS NULL) AND (planet_osm_line.name IS NULL) AND (planet_osm_line.junction IS NULL))\n) AS noname_road"
+      }, 
+      "name": "noname"
+    },
+    {
+      "geometry": "point", 
+      "id": "noname_dot", 
+      "Datasource": {
+        "type": "postgis", 
+        "geometry_field": "way", 
+        "key_field": "", 
+        "table": "(\n SELECT ST_PointOnSurface(way) as way FROM planet_osm_line WHERE ((planet_osm_line.highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'road')) AND ((planet_osm_line.tags->'noname') IS NULL) AND (planet_osm_line.name IS NULL) AND (planet_osm_line.junction IS NULL))\n) AS noname_road"
+      }, 
+      "name": "noname_dot"
+    }
+  ], 
+  "description": "Transparent map overlay showing roads with noname.", 
+  "Stylesheet": [
+    "noname.mss"
+  ], 
+  "name": "noname"
+}
