@@ -22,6 +22,13 @@ fi
 
 STYLE=$1
 
+json_verify < $STYLE/$STYLE.mml
+
+if [ $? -ne 0 ] ; then
+  echo "$STYLE/$STYLE.mml not valid JSON."
+  exit 1;
+fi
+
 echo "configure, compile and running: $STYLE"
 
 mkdir -p bin
