@@ -8,7 +8,7 @@
         "type": "postgis", 
         "geometry_field": "way", 
         "key_field": "", 
-        "table": "(\n SELECT way FROM planet_osm_line WHERE ((planet_osm_line.highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'road')) AND (planet_osm_line.name IS NULL) AND (planet_osm_line.junction IS NULL) AND ((planet_osm_line.tags->'noname') IS NULL) AND ((planet_osm_line.tags->'fixme:sign:no') IS NULL))\n) AS noname_road"
+        "table": "(\n SELECT way FROM planet_osm_line WHERE ((planet_osm_line.highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'road', 'service')) AND (planet_osm_line.name IS NULL) AND (planet_osm_line.junction IS NULL) AND ((planet_osm_line.tags->'noname') IS NULL) AND ((planet_osm_line.tags->'fixme:sign:no') IS NULL) AND (planet_osm_line.service IS NULL OR planet_osm_line.service NOT IN ('parking_aisle', 'driveway', 'drive-through')) AND (planet_osm_line.access IS NULL OR planet_osm_line.access NOT IN ('no', 'private')))\n) AS noname_road"
       }, 
       "name": "noname"
     },
@@ -19,7 +19,7 @@
         "type": "postgis", 
         "geometry_field": "way", 
         "key_field": "", 
-        "table": "(\n SELECT ST_PointOnSurface(way) as way FROM planet_osm_line WHERE ((planet_osm_line.highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'road')) AND (planet_osm_line.name IS NULL) AND (planet_osm_line.junction IS NULL) AND ((planet_osm_line.tags->'noname') IS NULL) AND ((planet_osm_line.tags->'fixme:sign:no') IS NULL))\n) AS noname_road"
+        "table": "(\n SELECT ST_PointOnSurface(way) as way FROM planet_osm_line WHERE ((planet_osm_line.highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'road', 'service')) AND (planet_osm_line.name IS NULL) AND (planet_osm_line.junction IS NULL) AND ((planet_osm_line.tags->'noname') IS NULL) AND ((planet_osm_line.tags->'fixme:sign:no') IS NULL) AND (planet_osm_line.service IS NULL OR planet_osm_line.service NOT IN ('parking_aisle', 'driveway', 'drive-through')) AND (planet_osm_line.access IS NULL OR planet_osm_line.access NOT IN ('no', 'private')))\n) AS noname_road"
       }, 
       "name": "noname_dot"
     }
