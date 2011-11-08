@@ -23,6 +23,8 @@
 
 }
 
+/* For all ways identifed as noname, we also render a dot on the way at low
+   zooms. This makes it easier to see those very short ways. */
 #noname_dot[zoom < 15] {
   point-file: url('symbols/red-dot-16.png');
 }
