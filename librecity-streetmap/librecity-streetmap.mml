@@ -1,0 +1,248 @@
+{
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Layer": [
+    {
+      "id": "processed_p",
+      "class": "land",
+      "name": "land"
+    },
+    {
+      "geometry": "polygon",
+      "id": "water",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way\n FROM\n   planet_osm_polygon\n WHERE\n   (planet_osm_polygon.waterway IN ('riverbank') OR planet_osm_polygon.natural IN ('bay') OR planet_osm_polygon.natural IN ('water'))\n) AS water"
+      },
+      "name": "water"
+    },
+    {
+      "geometry": "polygon",
+      "id": "park",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way\n FROM\n   planet_osm_polygon\n WHERE\n   (leisure IN ('park', 'golf_course'))\n) AS park"
+      },
+      "name": "park"
+    },
+    {
+      "geometry": "linestring",
+      "id": "aeroway",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way\n FROM\n   planet_osm_line\n WHERE\n   (aeroway IN ('runway', 'taxiway'))\n) AS aeroway"
+      },
+      "name": "aeroway"
+    },
+    {
+      "geometry": "polygon",
+      "id": "wood",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way\n FROM\n   planet_osm_polygon\n WHERE\n   (planet_osm_polygon.natural IN ('wood'))\n) AS wood"
+      },
+      "name": "wood"
+    },
+    {
+      "geometry": "polygon",
+      "id": "building",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way\n FROM\n   planet_osm_polygon\n WHERE\n   (building IS NOT NULL)\n) AS building"
+      },
+      "name": "building"
+    },
+    {
+      "geometry": "linestring",
+      "id": "highway_tunnel",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   highway,\n   name\n FROM\n   planet_osm_line\n WHERE\n   (highway IS NOT NULL) AND\n   (planet_osm_line.tunnel IN ('yes'))\n) AS highway_tunnel"
+      },
+      "name": "highway_tunnel"
+    },
+    {
+      "geometry": "linestring",
+      "id": "highway",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   highway\n FROM\n   planet_osm_line\n WHERE\n   (highway IS NOT NULL) AND\n   (planet_osm_line.bridge IS NULL) AND\n   (planet_osm_line.tunnel IS NULL)\n) AS highway"
+      },
+      "name": "highway"
+    },
+    {
+      "geometry": "linestring",
+      "id": "highway_bridge",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   highway,\n   name\n FROM\n   planet_osm_line\n WHERE\n   (highway IS NOT NULL) AND\n   (planet_osm_line.bridge IN ('yes'))\n) AS highway_bridge"
+      },
+      "name": "highway_bridge"
+    },
+    {
+      "geometry": "polygon",
+      "id": "park_label",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_polygon\n WHERE\n   (leisure IN ('park') AND name IS NOT NULL) AND way_area > 30000\n) AS park"
+      },
+      "name": "park_label"
+    },
+    {
+      "geometry": "linestring",
+      "id": "highway_label",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   highway,\n   name\n FROM\n   planet_osm_line\n WHERE\n   (highway IS NOT NULL) AND\n   (name IS NOT NULL) AND\n   (planet_osm_line.bridge IS NULL) AND\n   (planet_osm_line.tunnel IS NULL)\n) AS highway"
+      },
+      "name": "highway_label"
+    },
+    {
+      "geometry": "point",
+      "id": "restaurant",
+      "name": "restaurant",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (amenity IN ('restaurant'))\n) AS restaurant"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "burger",
+      "name": "burger",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (amenity IN ('fast_food'))\n) AS burger"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "clothes",
+      "name": "clothes",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (shop IN ('clothes'))\n) AS clothes"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "internet_cafe",
+      "name": "internet_cafe",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (tags->'internet_access' IN ('yes'))\n) AS internet_cafe"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "car_wash",
+      "name": "car_wash",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (shop IN ('car_wash'))\n) AS car_wash"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "autorepair",
+      "name": "autorepair",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (shop IN ('car_repair'))\n) AS autorepair"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "club",
+      "name": "club",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (amenity IN ('pub'))\n) AS club"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "bar",
+      "name": "bar",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (amenity IN ('bar'))\n) AS bar"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "police",
+      "name": "police",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (amenity IN ('police'))\n) AS police"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "hospital",
+      "name": "hospital",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (amenity IN ('hospital'))\n) AS hospital"
+      }
+    },
+    {
+      "geometry": "point",
+      "id": "fire",
+      "name": "fire",
+      "Datasource": {
+        "type": "postgis",
+        "geometry_field": "way",
+        "key_field": "",
+        "table": "(\n SELECT\n   way,\n   name\n FROM\n   planet_osm_point\n WHERE\n   (amenity IN ('fire'))\n) AS fire"
+      }
+    }
+  ],
+  "description": "OSM Stylesheet inspired from the GTA IV Liberty City Wall Map",
+  "Stylesheet": [
+    "librecity-streetmap.mss"
+  ],
+  "minzoom": 13,
+  "maxzoom": 18,
+  "name": "librecity-streetmap"
+}
