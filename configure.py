@@ -48,6 +48,8 @@ parser.add_argument('--user', default='osm')
 parser.add_argument('--password', default='osm')
 parser.add_argument('--srs', default='+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over')
 
+parser.add_argument('--shapedir', default='./layers/')
+
 # Increase performance if you are only rendering a particular area by
 # specifying a bounding box to restrict queries. Format is "XMIN,YMIN,XMAX,YMAX" in the
 # same units as the database (probably spherical mercator meters). The
@@ -64,19 +66,38 @@ args = parser.parse_args()
 
 mml = join(path[0], args.mml + '/' + args.mml + '.mml')
 
+shoreline_300 = args.shapedir.rstrip('/') + '/shoreline_300.shp'
+processed_p = args.shapedir.rstrip('/') + '/processed_p.shp'
+
 with open(mml, 'r') as f:
   newf = json.loads(f.read())
 f.closed
 
 with open(mml, 'w') as f:
   for layer in newf["Layer"]:
-    layer["Datasource"]["host"] = args.host
-    layer["Datasource"]["port"] = args.port
-    layer["Datasource"]["dbname"] = args.dbname
-    layer["Datasource"]["user"] = args.user
-    layer["Datasource"]["password"] = args.password
-    layer["Datasource"]["extent"] = args.extent
-    layer["srs"] = args.srs
+    if "Datasource" in layer:
+      ds_type = layer["Datasource"].get("type")
+      if ds_type and ds_type == "postgis":
+        layer["Datasource"]["host"] = args.host
+        layer["Datasource"]["port"] = args.port
+        layer["Datasource"]["dbname"] = args.dbname
+        layer["Datasource"]["user"] = args.user
+        layer["Datasource"]["password"] = args.password
+        layer["Datasource"]["extent"] = args.extent
+        layer["srs"] = args.srs
+    else:
+      if layer["id"] == "shoreline_300":
+        layer["Datasource"] = dict();
+        layer["Datasource"]["file"] = shoreline_300
+        layer["Datasource"]["type"] = 'shape'
+        layer["geometry"] = 'polygon'
+        layer["srs"] = '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
+      elif layer["id"] == "processed_p":
+        layer["Datasource"] = dict();
+        layer["Datasource"]["file"] = processed_p
+        layer["Datasource"]["type"] = 'shape'
+        layer["geometry"] = 'polygon'
+        layer["srs"] = '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
   f.write(json.dumps(newf, indent=2))
 f.closed
 
