@@ -18,3 +18,14 @@ You will also need to have some OSM data loaded into PostgreSQL using
 [osm2pgsql](http://wiki.openstreetmap.org/wiki/Osm2pgsql) with the `--hstore`
 option. A recent [`default.style`](http://svn.openstreetmap.org/applications/utils/export/osm2pgsql/default.style)
 shipped with osm2pgsql should be sufficient.
+
+Dependencies
+=============
+
+In addition to a carto compiler such as node-carto and libmapnik2 some
+stylesheets have additional dependencies.
+
+* librecity-streetmap
+ * sjjb-map-icons
+ * ttf-bitstream-vera
+ * fonts-liberation
