@@ -22,6 +22,17 @@
         "table": "(\n SELECT\n   way, power\n FROM\n   planet_osm_point\n WHERE\n   (power IN ('tower', 'pole'))\n) AS power_tower"
       }, 
       "name": "tower"
+    },
+    {
+      "geometry": "polygon", 
+      "id": "substation", 
+      "Datasource": {
+        "type": "postgis", 
+        "geometry_field": "way", 
+        "key_field": "", 
+        "table": "(\n SELECT\n   way, power\n FROM\n   planet_osm_polygon\n WHERE\n   (power IN ('sub_station'))\n) AS power_substation"
+      }, 
+      "name": "substation"
     }
   ], 
   "description": "Transparent map overlay showing the power network.", 
