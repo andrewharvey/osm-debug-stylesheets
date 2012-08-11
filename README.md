@@ -1,6 +1,6 @@
 About
 =============
-I have [live demos of these map stylesheets here](http://173.230.151.169/leaflet.html).
+I have [live demos of these map stylesheets here](http://tianjara.net/leaflet.html).
 
 License
 =============
