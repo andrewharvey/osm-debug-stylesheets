@@ -30,6 +30,9 @@
 
   /* black if a maxspeed tag exists, but we don't recognise it */
   line-color: @max_unrecognised;
+  
+  line-join: round;
+  line-cap: round;
 
   [maxspeed='5'] { line-color:  @max5 }
   [maxspeed='10'] { line-color: @max10 }
@@ -63,6 +66,9 @@
 
 #school-zone {
   line-color: @school_zone;
+
+  line-join: round;
+  line-cap: butt;
 
   [zoom<11] { line-width: 1 }
   [zoom=11] { line-width: 2  }
