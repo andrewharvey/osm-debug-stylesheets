@@ -54,6 +54,21 @@
 
 }
 
+#school-zone {
+  line-color: #d7cd73;
+
+  [zoom<11] { line-width: 1 }
+  [zoom=11] { line-width: 2  }
+  [zoom=12] { line-width: 3 }
+  [zoom=13] { line-width: 4 }
+  [zoom=14] { line-width: 6 }
+  [zoom=15] { line-width: 12 }
+  [zoom=16] { line-width: 24 }
+  [zoom=17] { line-width: 28 }
+  [zoom>17] { line-width: 32 }
+
+}
+
 #speed_camera[zoom > 10] {
   point-file: url('../maxspeed/symbols/yellow-dot-16.png');
 }
