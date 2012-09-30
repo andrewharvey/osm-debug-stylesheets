@@ -6,7 +6,7 @@
  * rights to this work.
  */
  
-#road {
+.road {
 
   /* black if a maxspeed tag exists, but we don't recognise it */
   line-color: #000000;
@@ -27,20 +27,7 @@
   [maxspeed='120'] { line-color: #f6f807 }
   [maxspeed='130'] { line-color: #c0f100 }
 
-  [zoom<11] { line-width: 0.25 }
-  [zoom=11] { line-width: 0.5  }
-  [zoom=12] { line-width: 0.75 }
-  [zoom=13] { line-width: 1 }
-  [zoom=14] { line-width: 2 }
-  [zoom=15] { line-width: 3 }
-  [zoom=16] { line-width: 6 }
-  [zoom=17] { line-width: 7 }
-  [zoom>17] { line-width: 8 }
-
-}
-
-#road-nomaxspeed {
-  line-color: #f90808;
+  [maxspeed=null] { line-color: #f90808; }
 
   [zoom<11] { line-width: 0.25 }
   [zoom=11] { line-width: 0.5  }
